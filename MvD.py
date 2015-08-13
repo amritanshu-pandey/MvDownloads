@@ -1,4 +1,4 @@
-import os, glob, shutil
+import os, glob, shutil, time
 
 from ExtensionList import *
 
@@ -6,8 +6,8 @@ from ExtensionList import *
 # Setup the source and Destination directories
 ###
 
-
 directoryList = {
+    "Logs":"~/Downloads/Logs",
     "downloadsDir":"~/Downloads",
     "musicDir":"~/Music",
     "videoDir":"~/Videos",
@@ -41,11 +41,13 @@ runForList = {
     "TBDFiles": [[i for i in TBDList],directoryList["TBDDir"]]
 }
 
+
 ###
 # Function to print the current working directory
 ###
 def printCwd():
     print('Current working directory: ' + os.getcwd())
+    f.write('Current working directory: ' + os.getcwd()+"\n")
 
 
 ###
@@ -53,6 +55,7 @@ def printCwd():
 ###
 def printUnderlines(delimiter, length):
     print("\t"+delimiter * length)
+    f.write("\t"+delimiter * length+"\n")
 
 
 ###
@@ -63,12 +66,16 @@ def checkAndCreateDir(dirName):
     if not (os.path.isdir(os.path.join(os.path.expanduser(dirName)))):
         printUnderlines("*",len(os.path.expanduser(dirName)) + 25)
         print("\tDirectory " + os.path.join(os.path.expanduser(dirName)) + " doesnt exists")
+        f.write("\tDirectory " + os.path.join(os.path.expanduser(dirName)) + " doesnt exists"+"\n")
         print("\tCreating directory " + os.path.join(os.path.expanduser(dirName)))
+        f.write("\tCreating directory " + os.path.join(os.path.expanduser(dirName))+"\n")
         try:
             os.makedirs(os.path.join(os.path.expanduser(dirName)))
             print("\tDirectory created")
+            f.write("\tDirectory created+\n")
         except:
             print("\tUnable to create the directory")
+            f.write("\tUnable to create the directory\n")
         printUnderlines("*",len(os.path.expanduser(directoryList["downloadsDir"])) + 25)
 
 ###
@@ -78,10 +85,14 @@ def printFileNames():
     for keys in stagingDict.keys():
         if (len(stagingDict[keys]) > 0):
             print(len(stagingDict[keys]), keys + " file(s) found")
+            f.write(str(len(stagingDict[keys]))+ keys + " file(s) found\n")
             print('*' * (15 + len(keys)))
+            f.write('*' * (15 + len(keys))+"\n")
             for files in stagingDict[keys]:
                 print(files)
+                f.write(files)
             print("\n")
+            f.write("\n")
 
 def moveFiles(dirName):
     for keys in stagingDict.keys():
@@ -90,9 +101,12 @@ def moveFiles(dirName):
                 try:
                     shutil.move(files,os.path.expanduser(dirName))
                     print("File "+files+" moved from "+directoryList["downloadsDir"]+" to "+os.path.expanduser(dirName))
+                    f.write("File "+files+" moved from "+directoryList["downloadsDir"]+" to "+os.path.expanduser(dirName)+"\n")
                 except:
                     print("Unable to move file "+files+" from "+directoryList["downloadsDir"]+" to "+os.path.expanduser(dirName))
+                    f.write("Unable to move file "+files+" from "+directoryList["downloadsDir"]+" to "+os.path.expanduser(dirName)+"\n")
             print("\n")
+            f.write("\n")
 
 
 ###
@@ -119,16 +133,26 @@ def moveFiles(dirName):
 def printDirs():
     for dirType in directoryList.keys():
         print(dirType+": \t"+directoryList[dirType])
+        f.write(dirType+": \t"+directoryList[dirType]+"\n")
         checkAndCreateDir(directoryList[dirType])
 
 ###
 # Switch to the Downloads directory
 ###
+
+checkAndCreateDir(directoryList["Logs"])
+logFile=os.path.join(os.path.expanduser(directoryList["Logs"]),"moveDownloads_"+str(time.time())+".log")
+f = open(logFile,'w')
+print("Logfile name: "+logFile)
+f.write("Logfile name: "+logFile+"\n")
+
 os.chdir(os.path.join(os.path.expanduser(directoryList["downloadsDir"])))
 printCwd()
 print("\n")
+f.write("\n")
 printDirs()
 print("\n")
+f.write("\n")
 
 for fileType in runForList.keys():
     ###
