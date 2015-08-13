@@ -84,7 +84,7 @@ def checkAndCreateDir(dirName):
 def printFileNames():
     for keys in stagingDict.keys():
         if (len(stagingDict[keys]) > 0):
-            print(len(stagingDict[keys]), keys + " file(s) found")
+            print(len(stagingDict[keys])+" "+ keys + " file(s) found")
             f.write(str(len(stagingDict[keys]))+ keys + " file(s) found\n")
             print('*' * (15 + len(keys)))
             f.write('*' * (15 + len(keys))+"\n")
@@ -140,7 +140,13 @@ def printDirs():
 # Switch to the Downloads directory
 ###
 
-checkAndCreateDir(directoryList["Logs"])
+if not (os.path.isdir(os.path.join(os.path.expanduser(directoryList["Logs"])))):
+    try:
+        os.makedirs(os.path.join(os.path.expanduser(directoryList["Logs"])))
+        print("\tLogs Directory created")
+    except:
+        print("\tUnable to create the Logs directory")
+
 logFile=os.path.join(os.path.expanduser(directoryList["Logs"]),"moveDownloads_"+str(time.time())+".log")
 f = open(logFile,'w')
 print("Logfile name: "+logFile)
@@ -163,6 +169,6 @@ for fileType in runForList.keys():
     # Prepare lists of different installer files
     ###
     for fileTypes in runForList[fileType][0]:
-        stagingDict[fileTypes] = glob.glob("*." + fileTypes)
+        stagingDict[fileTypes] = glob.glob("*."+fileTypes)
     printFileNames()
     moveFiles(runForList[fileType][1])
