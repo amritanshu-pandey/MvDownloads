@@ -76,6 +76,7 @@ def checkAndCreateDir(dirName):
             print("\tUnable to create the directory")
             f.write("\tUnable to create the directory\n")
         printUnderlines("*",len(os.path.expanduser(directoryList["downloadsDir"])) + 25)
+        print(" ")
 
 ###
 # Print files from the Staging Dictionary
@@ -83,7 +84,7 @@ def checkAndCreateDir(dirName):
 def printFileNames():
     for keys in stagingDict.keys():
         if (len(stagingDict[keys]) > 0):
-            print(len(stagingDict[keys])+" "+ keys + " file(s) found")
+            print(str(len(stagingDict[keys]))+" "+ keys + " file(s) found")
             f.write(str(len(stagingDict[keys]))+ keys + " file(s) found\n")
             print('*' * (15 + len(keys)))
             f.write('*' * (15 + len(keys))+"\n")

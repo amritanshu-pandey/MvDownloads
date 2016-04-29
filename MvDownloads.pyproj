@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{abed66b7-c610-4091-b7e1-a698f51f105a}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>ExtensionList.py</StartupFile>
+    <StartupFile>MvD.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
