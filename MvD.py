@@ -9,18 +9,17 @@ from ExtensionList import *
 directoryList = {
     "Logs":"~/Downloads/Logs",
     "downloadsDir":"~/Downloads",
-    "musicDir":"~/Music",
-    "videoDir":"~/Videos",
-    "pdfDir":"~/Documents/PDFs",
-    "ebookDir":"~/Documents/Ebooks",
+    "musicDir":"~/Music/MvD",
+    "videoDir":"~/Videos/MvD",
+    "pdfDir":"~/Documents/MvD",
+    "ebookDir":"~/Documents/MvD",
     "docDir":"~/Documents",
-    "installerDir":"~/DEBs",
-    "picDir":"~/Pictures",
-    "imageDir":"~/ISOs",
+    "installerDir":"~/Downloads/EXEs",
+    "picDir":"~/Pictures/MvD",
+    "imageDir":"~/Downloads/ISOs",
     "archiveDir":"~/Downloads/Archives",
     "scriptDir":"~/Downloads/Scripts",
     "TBDDir":"~/Downloads/TBD"
-
 }
 
 ###
