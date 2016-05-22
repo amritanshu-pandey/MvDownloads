@@ -23,7 +23,8 @@ musicList = [
 videoList = [
     "wmv",
     "mp4",
-    "flv"
+    "flv",
+	"webm"
 ]
 
 ebookList = [
@@ -52,6 +53,7 @@ picList = [
     "raw"
 ]
 
+#Disk images
 imageList = [
     "iso",
     "dmg",
@@ -74,7 +76,9 @@ scriptList = [
     "shell"
 ]
 
+# Garbage files to be deleted
 TBDList = [
     "ica",
-    "torrent"
+    "torrent",
+	"log"
 ]
